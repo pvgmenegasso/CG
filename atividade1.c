@@ -5,11 +5,12 @@
 #include "mouse.h"
 #include "cg2d.h"
 
+#define MAX_POINTS 10000
 int main(void) {
 
 	signed char* xy;
-	signed char xList[100];
-	signed char yList[100];
+	signed char xList[MAX_POINTS];
+	signed char yList[MAX_POINTS];
 	int count = 0;
     int fd;
 	
@@ -26,25 +27,30 @@ int main(void) {
 
 	// Se saiu do loop, houve um clique, armazena os proximos movimentos do mouse ate um novo clique
 	clique = 0;
-
+	xList[0] = 0;
+	yList[0] = 0;
 	while (!clique) {
-
 		clique = esquerdoApertado(fd);
-
 		xy = coordenadasMouse(fd);
-
-		xList[count] = xy[0];
-		yList[count] = xy[1];
-
-		count ++;
-
-		free(xy);
+		//Insere novos pontos apenas se o ponteiro do mouse mexer
+		signed char new_x = xy[0];
+		signed char new_y = xy[1];
+		if(new_x != xList[count] || new_y != yList[count]){
+			xList[count] = xy[0];
+			yList[count] = xy[1];
+			count ++;
+		}
+		//Limita ao tamanho máximo do array
+		if (count == MAX_POINTS){
+			free(xy);
+			break;
+		}
 	}
 
 
 	for(int i = 0; i<count; i++){
-		printf("X %d = %d", i, xList[i]);
-		printf("Y %d = %d", i, yList[i]);
+		printf("X%d = %d  ", i, xList[i]);
+		printf("Y%d = %d\n", i, yList[i]);
 	}
 
 		
