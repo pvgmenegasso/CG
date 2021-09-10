@@ -5,11 +5,12 @@
 #include "mouse.h"
 #include "cg2d.h"
 
+#define MAX_POINTS 10000
 int main(void) {
 
 	signed char* xy;
-	signed char xList[100];
-	signed char yList[100];
+	signed char xList[MAX_POINTS];
+	signed char yList[MAX_POINTS];
 	int count = 0;
     int fd;
 	
