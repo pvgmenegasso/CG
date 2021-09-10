@@ -43,8 +43,8 @@ int main(void) {
 
 
 	for(int i = 0; i<count; i++){
-		printf("X %d = %d", i, xList[i]);
-		printf("Y %d = %d", i, yList[i]);
+		printf("X%d = %d  ", i, xList[i]);
+		printf("Y%d = %d\n", i, yList[i]);
 	}
 
 		
