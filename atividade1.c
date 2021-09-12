@@ -6,6 +6,8 @@
 #include "cg2d.h"
 
 #define MAX_POINTS 10000
+
+
 int main(void) {
 
 	signed char* xy;
@@ -47,6 +49,16 @@ int main(void) {
 		}
 	}
 
+	// Agora transformamos os pontos em retas e utilizamos o primeiro ponto como a origem. os
+	// proxs pontos serao "absolutos" em relacao a esta origem
+	/*
+
+	X0 = [n0], X1 = [n0+n1], X2 = [n0+n1+n2]
+
+	Y0 = [n0], Y1 = [n0+n1], Y2 = [n0+n1+n2]
+
+	*/
+
 
 	for(int i = 0; i<count; i++){
 		printf("X%d = %d  ", i, xList[i]);
@@ -56,3 +68,4 @@ int main(void) {
 		
 
 }
+
