@@ -10,6 +10,26 @@
 
 int main(void) {
 
+	// Variaveis relacionadas ao ambiente grafico
+	palette * palheta;
+	bufferdevice * monitor;
+	window * janela;
+	viewport * porta;
+	object * desenho;
+	
+	
+	SetWorld(-20, -20, 10, 15); // Define o tamanho do mundo  
+	monitor = CreateBuffer(640,480); // Cria um monitor virtual
+  
+	palheta = CreatePalette(5);  // Cria um colormap (lookup table) com 5 cores
+	SetColor(0,0,0,palheta);
+	SetColor(1,0,0,palheta);
+	SetColor(0,1,0,palheta);
+	SetColor(0,0,1,palheta);
+
+	desenho = CreateObject(MAX_POINTS); // cria um objeto correspondente aos pontos
+
+	// Variaveis relacionadas ao mouse input
 	signed char* xy;
 	signed char xList[MAX_POINTS];
 	signed char yList[MAX_POINTS];
