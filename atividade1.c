@@ -5,6 +5,13 @@
 #include "mouse.h"
 #include "cg2d.h"
 
+/*
+Atividade 1 de computacao grafica
+Alunos:
+	Pedro Vinicius Gallo Menegasso	RA 595160
+	Rafael Bordin					RA xxxxxx
+*/
+
 #define MAX_POINTS 100
 
 
