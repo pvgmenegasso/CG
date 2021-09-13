@@ -5,7 +5,24 @@
 #include "mouse.h"
 #include "cg2d.h"
 
-#define MAX_POINTS 10000
+#define MAX_POINTS 100
+
+
+int * NormalizaVetor(signed char list[], int size){
+	// Cria novo vetor para resultado
+	int * newVector = (int *) malloc(size*sizeof(int));
+	
+	// Inicializa o vetor
+	newVector[0] = list[0];
+	
+	// Percorre o vetor:
+	
+	for(int i = 1; i<size; i++){
+
+		newVector[i] = newVector[i-1]+list[i];
+
+	}
+}
 
 
 int main(void) {
@@ -85,7 +102,12 @@ int main(void) {
 		printf("Y%d = %d\n", i, yList[i]);
 	}
 
+	int * novoX;
+	novoX = NormalizaVetor(xList, MAX_POINTS);
+
 		
 
 }
+
+
 
