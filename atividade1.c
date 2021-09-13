@@ -12,7 +12,7 @@ Alunos:
 	Rafael Bordin					RA xxxxxx
 */
 
-#define MAX_POINTS 100
+#define MAX_POINTS 30
 
 
 int * NormalizaVetor(signed char list[], int size){
@@ -29,6 +29,8 @@ int * NormalizaVetor(signed char list[], int size){
 		newVector[i] = newVector[i-1]+list[i];
 
 	}
+
+	return newVector;
 }
 
 
@@ -42,7 +44,7 @@ int main(void) {
 	object * desenho;
 	
 	
-	SetWorld(-20, -20, 10, 15); // Define o tamanho do mundo  
+	SetWorld(0, 0, MAX_POINTS, MAX_POINTS); // Define o tamanho do mundo  
 	monitor = CreateBuffer(640,480); // Cria um monitor virtual
   
 	palheta = CreatePalette(5);  // Cria um colormap (lookup table) com 5 cores
@@ -112,11 +114,38 @@ int main(void) {
 	int * novoX;
 	int * novoY;
 	novoX = NormalizaVetor(xList, MAX_POINTS);
-	novoY = NormalizaVetor(xList, MAX_POINTS);
+	novoY = NormalizaVetor(yList, MAX_POINTS);
 
+	printf(" =========================  \n");
 
+	for(int i = 0; i<count; i++){
+		printf("X%d = %d  ", i, novoX[i]);
+		printf("Y%d = %d\n", i, novoY[i]);
+	}
+
+	printf("gothere");
+
+	// Cria o "poligono"
+	for(int i = 0; i<MAX_POINTS; i++){
+
+		SetObject(SetPoint(novoX[i], novoY[i], 1, 1), desenho);
+
+	}
+
+	janela = CreateWindow(-10.0,-10.0,0.0,0.0); // cria uma janela de visualização (coordenadas no SRU)
+
+	porta = CreateViewPort(0, 0, 639, 479); // Cria uma viewport
+
+	DrawObject(desenho,janela,porta,monitor,1);
+
+	printf("gothere");
+
+	Dump2X(monitor,palheta);
+	
 	free(novoX);
 	free(novoY);
+
+	return 0;
 
 		
 
