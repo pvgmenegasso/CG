@@ -110,7 +110,13 @@ int main(void) {
 	}
 
 	int * novoX;
+	int * novoY;
 	novoX = NormalizaVetor(xList, MAX_POINTS);
+	novoY = NormalizaVetor(xList, MAX_POINTS);
+
+
+	free(novoX);
+	free(novoY);
 
 		
 
