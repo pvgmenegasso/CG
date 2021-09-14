@@ -5,11 +5,57 @@
 #include "mouse.h"
 #include "cg2d.h"
 
-#define MAX_POINTS 10000
+/*
+Atividade 1 de computacao grafica
+Alunos:
+	Pedro Vinicius Gallo Menegasso	RA 595160
+	Rafael Bordin					RA xxxxxx
+*/
+
+#define MAX_POINTS 30
+
+
+int * NormalizaVetor(signed char list[], int size){
+	// Cria novo vetor para resultado
+	int * newVector = (int *) malloc(size*sizeof(int));
+	
+	// Inicializa o vetor
+	newVector[0] = list[0];
+	
+	// Percorre o vetor:
+	
+	for(int i = 1; i<size; i++){
+
+		newVector[i] = newVector[i-1]+list[i];
+
+	}
+
+	return newVector;
+}
 
 
 int main(void) {
 
+	// Variaveis relacionadas ao ambiente grafico
+	palette * palheta;
+	bufferdevice * monitor;
+	window * janela;
+	viewport * porta;
+	object * desenho;
+	
+	
+	SetWorld(0, 0, MAX_POINTS, MAX_POINTS); // Define o tamanho do mundo  
+	monitor = CreateBuffer(1360,768); // Cria um monitor virtual
+  
+	palheta = CreatePalette(5);  // Cria um colormap (lookup table) com 5 cores
+	SetColor(0,0,0,palheta);
+	SetColor(1,0,0,palheta);
+	SetColor(0,1,0,palheta);
+	SetColor(0,0,1,palheta);
+
+	desenho = CreateObject(MAX_POINTS); // cria um objeto correspondente aos pontos
+
+	// Variaveis relacionadas ao mouse input
 	signed char* xy;
 	signed char xList[MAX_POINTS];
 	signed char yList[MAX_POINTS];
@@ -65,7 +111,45 @@ int main(void) {
 		printf("Y%d = %d\n", i, yList[i]);
 	}
 
+	int * novoX;
+	int * novoY;
+	novoX = NormalizaVetor(xList, MAX_POINTS);
+	novoY = NormalizaVetor(yList, MAX_POINTS);
+
+	printf(" =========================  \n");
+
+	for(int i = 0; i<count; i++){
+		printf("X%d = %d  ", i, novoX[i]);
+		printf("Y%d = %d\n", i, novoY[i]);
+	}
+
+	printf("gothere");
+
+	// Cria o "poligono"
+	for(int i = 0; i<MAX_POINTS; i++){
+
+		SetObject(SetPoint(novoX[i], novoY[i], 1, 1), desenho);
+
+	}
+
+	janela = CreateWindow(-200,-200.0, 200.0, 200.0); // cria uma janela de visualização (coordenadas no SRU)
+
+	porta = CreateViewPort(0, 0, 1300, 760); // Cria uma viewport
+
+	DrawObject(desenho,janela,porta,monitor,1);
+
+	printf("gothere");
+
+	Dump2X(monitor,palheta);
+	
+	free(novoX);
+	free(novoY);
+
+	return 0;
+
 		
 
 }
+
+
 
