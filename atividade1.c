@@ -45,7 +45,7 @@ int main(void) {
 	
 	
 	SetWorld(0, 0, MAX_POINTS, MAX_POINTS); // Define o tamanho do mundo  
-	monitor = CreateBuffer(640,480); // Cria um monitor virtual
+	monitor = CreateBuffer(1360,768); // Cria um monitor virtual
   
 	palheta = CreatePalette(5);  // Cria um colormap (lookup table) com 5 cores
 	SetColor(0,0,0,palheta);
@@ -132,9 +132,9 @@ int main(void) {
 
 	}
 
-	janela = CreateWindow(-10.0,-10.0,0.0,0.0); // cria uma janela de visualização (coordenadas no SRU)
+	janela = CreateWindow(-200,-200.0, 200.0, 200.0); // cria uma janela de visualização (coordenadas no SRU)
 
-	porta = CreateViewPort(0, 0, 639, 479); // Cria uma viewport
+	porta = CreateViewPort(0, 0, 1300, 760); // Cria uma viewport
 
 	DrawObject(desenho,janela,porta,monitor,1);
 
